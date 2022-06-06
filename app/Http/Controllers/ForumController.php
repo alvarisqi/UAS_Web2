@@ -53,7 +53,7 @@ class ForumController extends Controller
             $forums->image = $filename;
         }
         $forums->save();
-        return back();
+        return back()->withInfo('Berhasil dikirim');
     }
 
     /**
@@ -103,7 +103,7 @@ class ForumController extends Controller
             $forums->image = $filename;
         }
         $forums->save();
-        return back();
+        return back()->withInfo('Berhasil diupdate');
     }
 
     /**
