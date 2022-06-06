@@ -23,5 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/forum', 'App\Http\Controllers\ForumController');
 
+Route::post('/comment/addComment/{forum}', 'CommentController@addComment')->name('addComment');
+
 
 
