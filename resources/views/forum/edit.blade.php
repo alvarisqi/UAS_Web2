@@ -15,7 +15,7 @@
                             <input type="text" name="title" class="form-control" value="{{$forum->title}}">
                         </div>
                         <div class="form-group">
-                            <textarea type="text" name="description" class="form-control" value="{{$forum->description}}"></textarea>
+                            <textarea type="text" name="description" class="form-control" placeholder="Description..">{{$forum->description}}</textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" name="image" class="form-control">

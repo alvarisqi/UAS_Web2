@@ -35,6 +35,11 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png,gif|max:10000',
+        ]);
         $forums = New Forum;
         $forums->user_id = Auth::user()->id;
         $forums->title = $request->title;
