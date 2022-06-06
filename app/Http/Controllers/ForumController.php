@@ -68,9 +68,10 @@ class ForumController extends Controller
      * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function edit(forum $forum)
+    public function edit($id)
     {
-        //
+        $forum = Forum::find($id);
+        return view('forum.edit', compact('forum'));
     }
 
     /**
@@ -80,9 +81,24 @@ class ForumController extends Controller
      * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, forum $forum)
+    public function update(Request $request, $id)
     {
-        //
+        $forums = Forum::find($id);
+        $forums->user_id = Auth::user()->id;
+        $forums->title = $request->title;
+        $forums->slug = str_slug($request->title);
+        $forums->description = $request->description;
+        if ($request->file('image')){
+            $file = $request->file('image');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $location = public_path('/images)');
+            $file->move($location, $filename);
+            $oldImage = $forums->image;
+            \Storage::delete($oldImage);
+            $forums->image = $filename;
+        }
+        $forums->save();
+        return back();
     }
 
     /**
